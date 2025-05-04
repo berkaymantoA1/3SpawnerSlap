@@ -25,7 +25,7 @@ Title.BackgroundTransparency = 1 -- Arka plan şeffaf
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.Font = Enum.Font.GothamBlack
 Title.TextSize = 18
-Title.Text = "👑BerkHub Free Slap👑"
+Title.Text = "👑BerkHub Free Glove👑"
 Title.Parent = Frame
 TitleCorner.CornerRadius = UDim.new(1, 0)
 TitleCorner.Parent = Title
@@ -37,7 +37,7 @@ FreeSlapButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
 FreeSlapButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 FreeSlapButton.Font = Enum.Font.GothamBold
 FreeSlapButton.TextSize = 20
-FreeSlapButton.Text = "Free Slap"
+FreeSlapButton.Text = "Free Glove"
 FreeSlapButton.Parent = Frame
 ButtonCorner.CornerRadius = UDim.new(1, 0)
 ButtonCorner.Parent = FreeSlapButton
@@ -54,13 +54,13 @@ end)
 -- Buton tıklanınca tool ver ve GUI'yi kapat
 FreeSlapButton.MouseButton1Click:Connect(function()
     local player = game.Players.LocalPlayer
-    local slapTool = game.Workspace:FindFirstChild("Game") and game.Workspace.Game:FindFirstChild("Slap")
+    local gloveTool = game.ReplicatedStorage:FindFirstChild("Glove") -- ReplicatedStorage içinde Glove Tool'ü arıyoruz.
 
-    if player and slapTool then
-        slapTool.Parent = player.Backpack
-        print("Slap Tool verildi!")
+    if player and gloveTool then
+        gloveTool:Clone().Parent = player.Backpack -- Eğer Glove Tool bulunursa, onu oyuncunun Backpack'ine koyuyoruz.
+        print("Glove Tool verildi!")
     else
-        warn("Slap Tool bulunamadı.")
+        warn("Glove Tool bulunamadı.")
     end
 
     -- Animasyonu durdur ve GUI'yi yok et
