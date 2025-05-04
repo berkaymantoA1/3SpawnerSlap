@@ -8,7 +8,7 @@ local TitleCorner = Instance.new("UICorner")
 
 -- GUI'yi ekle
 ScreenGui.Parent = game.CoreGui
-ScreenGui.Name = "BerkHubFreeSlap"
+ScreenGui.Name = "BerkHubFreeGlove"
 
 -- Ana çerçeve
 Frame.Size = UDim2.new(0, 220, 0, 140)
@@ -51,14 +51,18 @@ task.spawn(function()
     end
 end)
 
--- Buton tıklanınca tool ver ve GUI'yi kapat
+-- Buton tıklanınca RemoteEvent tetiklenir ve Glove alınır
 FreeSlapButton.MouseButton1Click:Connect(function()
     local player = game.Players.LocalPlayer
-    local gloveTool = game.ReplicatedStorage:FindFirstChild("Glove") -- ReplicatedStorage içinde Glove Tool'ü arıyoruz.
+    local gloveTool = game.ReplicatedStorage:FindFirstChild("Glove") -- ReplicatedStorage'teki Glove Tool'u al
 
-    if player and gloveTool then
-        gloveTool:Clone().Parent = player.Backpack -- Eğer Glove Tool bulunursa, onu oyuncunun Backpack'ine koyuyoruz.
-        print("Glove Tool verildi!")
+    if gloveTool then
+        gloveTool:Clone().Parent = player.Backpack -- Glove Tool'u oyuncunun Backpack'ine koy
+        print("Glove Tool oyuncuya verildi!")
+
+        -- RemoteEvent tetikle
+        local remoteEvent = game.ReplicatedStorage:WaitForChild("SuspiciousActionEvent")
+        remoteEvent:FireServer() -- Server tarafında tüm oyunculara göstermek için tetikle
     else
         warn("Glove Tool bulunamadı.")
     end
